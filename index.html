@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>胡志明市散步繪本｜旅遊景點參考清單</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <style>
+    :root {
+      --bg-washi: #FFFCF6;
+      --ink-gray: #3E3A39;
+      --coral-pink: #F2A497;
+      --yamabuki-yellow: #F6D27A;
+      --mizu-blue: #A8D3E6;
+      --wakatake-green: #B9DAA5;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-washi);
+      color: var(--ink-gray);
+      font-family: 'Huninn', 'jf-openhuninn', 'Zen Maru Gothic', 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* 3px 墨灰粗線框 & 大圓角 & 平塗無漸層 */
+    .ehon-box {
+      background-color: var(--bg-washi);
+      border: 3px solid var(--ink-gray);
+      border-radius: 24px;
+      box-shadow: 4px 4px 0px var(--ink-gray);
+    }
+
+    .ehon-card {
+      background-color: #FFFFFF;
+      border: 3px solid var(--ink-gray);
+      border-radius: 24px;
+      box-shadow: 4px 4px 0px var(--ink-gray);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+
+    .ehon-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 6px 6px 0px var(--ink-gray);
+    }
+
+    .ehon-btn {
+      border: 3px solid var(--ink-gray);
+      border-radius: 9999px;
+      box-shadow: 3px 3px 0px var(--ink-gray);
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s ease, background-color 0.15s ease;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      color: var(--ink-gray);
+    }
+
+    .ehon-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px var(--ink-gray);
+    }
+
+    .ehon-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px var(--ink-gray);
+    }
+
+    .ehon-badge {
+      border: 2.5px solid var(--ink-gray);
+      border-radius: 9999px;
+      padding: 3px 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .bg-coral { background-color: var(--coral-pink); }
+    .bg-yellow { background-color: var(--yamabuki-yellow); }
+    .bg-blue { background-color: var(--mizu-blue); }
+    .bg-green { background-color: var(--wakatake-green); }
+    .bg-washi { background-color: var(--bg-washi); }
+
+    /* 插圖輕輕動動畫 */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(2deg); }
+    }
+
+    @keyframes sway-gentle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+
+    @keyframes scoot-move {
+      0%, 100% { transform: translateX(0px) translateY(0px); }
+      25% { transform: translateX(2px) translateY(-2px); }
+      75% { transform: translateX(-2px) translateY(-1px); }
+    }
+
+    .svg-float {
+      animation: float-slow 3.6s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .svg-sway {
+      animation: sway-gentle 3.2s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    .svg-scoot {
+      animation: scoot-move 2.8s ease-in-out infinite;
+    }
+
+    /* 切換區域彈跳效果 */
+    @keyframes bounce-switch {
+      0% {
+        opacity: 0;
+        transform: scale(0.92) translateY(18px);
+      }
+      55% {
+        opacity: 1;
+        transform: scale(1.02) translateY(-5px);
+      }
+      80% {
+        transform: scale(0.99) translateY(2px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .bounce-enter {
+      animation: bounce-switch 0.48s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes tab-pop {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.08) translateY(-3px); }
+      75% { transform: scale(0.97) translateY(1px); }
+      100% { transform: scale(1); }
+    }
+
+    .tab-active-pop {
+      animation: tab-pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* 支援「減少動態效果」設定 */
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .svg-float, .svg-sway, .svg-scoot, .bounce-enter, .tab-active-pop {
+        animation: none !important;
+        transform: none !important;
+      }
+      .ehon-card:hover, .ehon-btn:hover, .ehon-btn:active {
+        transform: none !important;
+      }
+    }
+
+    /* 手機優先隱藏捲軸但保留滑動 */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- 頂端固定選單 -->
+  <header class="sticky top-0 z-50 bg-[#FFFCF6] border-b-[3px] border-[#3E3A39] px-3 py-3">
+    <div class="max-w-4xl mx-auto flex flex-col gap-2.5">
+      <!-- 頂部小標與裝飾圖示 -->
+      <div class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-2">
+          <!-- 越南斗笠手繪 SVG -->
+          <svg class="w-8 h-8 svg-sway shrink-0" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 44L32 14L56 44H8Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 32L32 44L46 32" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 44C20 51 44 51 44 44" stroke="#F2A497" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <h1 class="text-lg sm:text-xl font-bold tracking-wide leading-tight">胡志明市散步繪本</h1>
+            <p class="text-xs opacity-80">54 個精選地點・Google Maps 導航指南</p>
+          </div>
+        </div>
+        <span id="total-counter-badge" class="ehon-badge bg-yellow text-xs">
+          第1郡｜29 處
+        </span>
+      </div>
+
+      <!-- 區域切換頁籤 (第1郡 / Thảo Điền（舊第2郡） / Bình Thạnh) -->
+      <nav aria-label="區域切換選單" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+        <button
+          id="tab-d1"
+          type="button"
+          data-district="d1"
+          class="district-tab ehon-btn bg-coral py-2.5 px-3 text-sm sm:text-base"
+          aria-selected="true"
+        >
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="14" width="28" height="20" rx="3" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <path d="M13 14V10C13 7 27 7 27 10V14" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+            <circle cx="20" cy="24" r="4" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5"/>
+          </svg>
+          <span>第1郡 (29)</span>
+        </button>
+
+        <button
+          id="tab-td"
+          type="button"
+          data-district="td"
+          class="district-tab ehon-btn bg-washi py-2.5 px-3 text-sm sm:text-base"
+          aria-selected="false"
+        >
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 40 40" fill="none">
+            <path d="M20 34V18" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+            <path d="M20 18C12 18 8 11 14 8C19 6 20 13 20 18Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M20 22C28 22 32 15 26 12C21 10 20 17 20 22Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          <span>Thảo Điền（舊第2郡）(23)</span>
+        </button>
+
+        <button
+          id="tab-bt"
+          type="button"
+          data-district="bt"
+          class="district-tab col-span-2 sm:col-span-1 ehon-btn bg-washi py-2 px-3 text-xs sm:text-sm"
+          aria-selected="false"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 40 40" fill="none">
+            <polygon points="20,5 24,15 35,16 27,23 29,34 20,28 11,34 13,23 5,16 16,15" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+          <span>Bình Thạnh 順遊 (2)</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主要內容容器 -->
+  <main class="max-w-4xl mx-auto px-3 sm:px-4 pt-4">
+
+    <!-- 目的地特色手繪風景橫幅 (隨分區切換地標、交通工具、風景) -->
+    <section id="district-banner" class="ehon-box p-4 sm:p-5 mb-4 relative overflow-hidden">
+      <div id="banner-inner" class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- 由 JS 動態渲染對應區域的介紹與大型手繪 SVG 風景 -->
+      </div>
+    </section>
+
+    <!-- 搜尋與類型篩選列 -->
+    <section aria-label="篩選與搜尋" class="mb-5 space-y-3">
+      <div class="flex flex-col sm:flex-row gap-2.5">
+        <!-- 關鍵字搜尋框 -->
+        <div class="relative flex-1">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="搜尋店名、河粉、蛋咖啡、皮件、Spa..."
+            class="w-full bg-white border-[3px] border-[#3E3A39] rounded-full py-2.5 pl-10 pr-9 text-sm focus:outline-none shadow-[3px_3px_0px_#3E3A39]"
+          >
+          <svg class="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5"/>
+            <path d="M16.5 16.5L21 21" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <button
+            id="clear-search-btn"
+            type="button"
+            aria-label="清除搜尋"
+            class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#F2A497] border-2 border-[#3E3A39] text-xs font-bold flex items-center justify-center"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- 分類快篩膠囊 -->
+      <div id="category-filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 pt-0.5">
+        <button type="button" data-cat="all" class="cat-pill ehon-btn bg-yellow px-3.5 py-1.5 text-xs shrink-0">全部類型</button>
+        <button type="button" data-cat="food" class="cat-pill ehon-btn bg-washi px-3.5 py-1.5 text-xs shrink-0">🍜 餐飲美食</button>
+        <button type="button" data-cat="cafe" class="cat-pill ehon-btn bg-washi px-3.5 py-1.5 text-xs shrink-0">☕ 咖啡・烘焙・小酌</button>
+        <button type="button" data-cat="shop" class="cat-pill ehon-btn bg-washi px-3.5 py-1.5 text-xs shrink-0">🛍️ 選物・服飾・伴手禮</button>
+        <button type="button" data-cat="relax" class="cat-pill ehon-btn bg-washi px-3.5 py-1.5 text-xs shrink-0">🌿 Spa・美容・服務</button>
+      </div>
+    </section>
+
+    <!-- 景點卡片網格 (切換時觸發彈跳動畫) -->
+    <section id="places-section" aria-live="polite">
+      <div id="places-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 bounce-enter">
+        <!-- 由 JS 渲染 54 個景點卡片 -->
+      </div>
+
+      <!-- 無符合結果提示 -->
+      <div id="empty-state" class="hidden ehon-box p-8 text-center my-6">
+        <div class="w-20 h-20 mx-auto mb-3 svg-float">
+          <svg viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="30" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+            <circle cx="30" cy="36" r="3.5" fill="#3E3A39"/>
+            <circle cx="50" cy="36" r="3.5" fill="#3E3A39"/>
+            <path d="M32 50C35 46 45 46 48 50" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="text-base font-bold mb-2">找不到符合條件的地點耶</p>
+        <p class="text-xs opacity-80 mb-4">試試看切換其他區域頁籤，或清除搜尋關鍵字吧！</p>
+        <button id="reset-filter-btn" type="button" class="ehon-btn bg-yellow px-5 py-2 text-sm">
+          重設所有篩選
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部繪本風裝飾頁尾 -->
+  <footer class="max-w-4xl mx-auto px-4 mt-10">
+    <div class="ehon-box p-4 bg-washi flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <!-- 摩托車手繪 SVG -->
+        <svg class="w-10 h-10 svg-scoot shrink-0" viewBox="0 0 64 64" fill="none">
+          <circle cx="16" cy="46" r="8" fill="#3E3A39"/>
+          <circle cx="16" cy="46" r="4" fill="#FFFCF6"/>
+          <circle cx="48" cy="46" r="8" fill="#3E3A39"/>
+          <circle cx="48" cy="46" r="4" fill="#FFFCF6"/>
+          <path d="M12 44C12 34 22 32 32 32H44L48 20H38" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 32V26H34V32" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <circle cx="50" cy="22" r="4" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5"/>
+        </svg>
+        <div>
+          <p class="font-bold text-sm">胡志明市散步地圖冊 (Ho Chi Minh City Guide)</p>
+          <p class="opacity-80">收錄第1郡中心 29 處、Thảo Điền（舊第2郡）23 處、Bình Thạnh 2 處，共 54 個地點</p>
+        </div>
+      </div>
+      <button id="back-to-top-btn" type="button" class="ehon-btn bg-green px-4 py-2 text-xs shrink-0">
+        ↑ 回到頂端
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    // 手繪風 SVG 圖示庫 (地標、交通工具、風景、餐飲、選物、休閒)
+    const SVG_ICONS = {
+      noodle: `
+        <svg class="w-12 h-12 svg-float" viewBox="0 0 64 64" fill="none">
+          <path d="M12 32H52C52 45 43 52 32 52C21 52 12 45 12 32Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M22 52H42" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <path d="M16 26C22 22 42 22 48 26" stroke="#F6D27A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M22 14V28M28 12V28" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M18 16L48 12" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="38" cy="27" r="4" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5"/>
+        </svg>`,
+      vietFood: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="34" r="20" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+          <circle cx="32" cy="34" r="13" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M25 32C27 28 37 28 39 32" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="29" cy="36" r="3" fill="#F2A497" stroke="#3E3A39" stroke-width="2"/>
+          <circle cx="36" cy="35" r="3" fill="#F2A497" stroke="#3E3A39" stroke-width="2"/>
+        </svg>`,
+      coffee: `
+        <svg class="w-12 h-12 svg-float" viewBox="0 0 64 64" fill="none">
+          <path d="M18 26H42V42C42 48 37 52 30 52C23 52 18 48 18 42V26Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M42 30H47C50 30 50 38 47 38H42" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="15" y="20" width="30" height="6" rx="2" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+          <path d="M25 14C25 11 27 11 27 8M33 14C33 11 35 11 35 8" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`,
+      bakery: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <path d="M14 38C10 28 20 20 32 20C44 20 54 28 50 38C47 44 41 44 38 40C35 44 29 44 26 40C23 44 17 44 14 38Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M24 24C26 28 26 32 24 36M32 22C34 27 34 32 32 37M40 24C38 28 38 32 40 36" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`,
+      grill: `
+        <svg class="w-12 h-12 svg-float" viewBox="0 0 64 64" fill="none">
+          <ellipse cx="32" cy="36" rx="20" ry="13" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+          <ellipse cx="36" cy="35" rx="7" ry="5" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+          <circle cx="36" cy="35" r="2" fill="#F6D27A"/>
+          <path d="M22 32L26 40M28 30L31 38" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`,
+      sushi: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <rect x="14" y="30" width="36" height="16" rx="8" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+          <path d="M12 30C16 20 48 20 52 30C44 34 20 34 12 30Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <rect x="27" y="23" width="10" height="23" fill="#3E3A39"/>
+        </svg>`,
+      wine: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <path d="M20 14H44L41 30C39 37 25 37 23 30L20 14Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M22 23H42" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M32 36V50M22 50H42" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+        </svg>`,
+      fashion: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <path d="M22 16L12 24L18 32L22 28V48H42V28L46 32L52 24L42 16C39 20 25 20 22 16Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M26 26H38" stroke="#FFFCF6" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`,
+      bag: `
+        <svg class="w-12 h-12 svg-float" viewBox="0 0 64 64" fill="none">
+          <rect x="14" y="24" width="36" height="26" rx="6" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+          <path d="M23 24V18C23 13 41 13 41 18V24" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 33H50" stroke="#3E3A39" stroke-width="2.5"/>
+          <rect x="28" y="30" width="8" height="7" rx="2" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5"/>
+        </svg>`,
+      ceramic: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <path d="M24 16H40L37 25C45 30 46 44 39 50H25C18 44 19 30 27 25L24 16Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M22 36C27 33 37 33 42 36" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="32" cy="43" r="3" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+        </svg>`,
+      gift: `
+        <svg class="w-12 h-12 svg-float" viewBox="0 0 64 64" fill="none">
+          <rect x="16" y="26" width="32" height="24" rx="4" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3"/>
+          <rect x="13" y="20" width="38" height="8" rx="3" fill="#F2A497" stroke="#3E3A39" stroke-width="3"/>
+          <path d="M32 20V50" stroke="#3E3A39" stroke-width="3"/>
+          <path d="M32 20C26 12 20 15 24 20C28 15 32 20 32 20ZM32 20C38 12 44 15 40 20C36 15 32 20 32 20Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+        </svg>`,
+      spa: `
+        <svg class="w-12 h-12 svg-sway" viewBox="0 0 64 64" fill="none">
+          <path d="M32 16C38 24 38 36 32 44C26 36 26 24 32 16Z" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M32 44C20 42 14 32 18 24C24 26 28 34 32 44Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M32 44C44 42 50 32 46 24C40 26 36 34 32 44Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M16 48C24 52 40 52 48 48" stroke="#B9DAA5" stroke-width="4" stroke-linecap="round"/>
+        </svg>`,
+      exchange: `
+        <svg class="w-12 h-12 svg-float" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="18" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+          <circle cx="32" cy="32" r="12" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+          <path d="M32 24V40M28 28H35C37 28 37 32 34 32H29C27 32 27 36 30 36H36" stroke="#3E3A39" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>`
+    };
+
+    // 區域風景橫幅資料 (含地標、交通工具、風景手繪插圖)
+    const DISTRICT_BANNERS = {
+      d1: {
+        title: "第1郡中心 (District 1)",
+        subtitle: "西貢經典地標・咖啡公寓・越式河粉與設計小店散步圈",
+        badgeColor: "bg-coral",
+        bgTint: "bg-[#FFFCF6]",
+        extraLink: null,
+        svg: `
+          <svg class="w-full max-w-[260px] h-28 shrink-0" viewBox="0 0 280 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 太陽與雲朵 -->
+            <circle cx="42" cy="26" r="12" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" class="svg-float"/>
+            <path d="M82 28C82 23 88 20 93 23C97 19 105 21 106 27H82V28Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- 濱城市場鐘樓地標 -->
+            <rect x="120" y="42" width="64" height="54" rx="4" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+            <polygon points="116,42 152,20 188,42" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="138" y="24" width="28" height="22" rx="3" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <circle cx="152" cy="35" r="6" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5"/>
+            <path d="M140 96V68C140 60 164 60 164 68V96" fill="#3E3A39"/>
+            <!-- 咖啡公寓陽台建築 -->
+            <rect x="200" y="26" width="52" height="70" rx="4" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+            <rect x="208" y="34" width="14" height="14" rx="2" fill="#F6D27A" stroke="#3E3A39" stroke-width="2.5"/>
+            <rect x="228" y="34" width="14" height="14" rx="2" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5"/>
+            <rect x="208" y="54" width="14" height="14" rx="2" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5"/>
+            <rect x="228" y="54" width="14" height="14" rx="2" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+            <!-- 穿梭的越南摩托車 -->
+            <g class="svg-scoot">
+              <circle cx="48" cy="88" r="7" fill="#3E3A39"/>
+              <circle cx="78" cy="88" r="7" fill="#3E3A39"/>
+              <path d="M44 86C44 76 54 74 64 74H74L78 62H70" fill="#F2A497" stroke="#3E3A39" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M54 58L64 48L74 58H54Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            </g>
+            <path d="M12 96H268" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          </svg>`
+      },
+      td: {
+        title: "Thảo Điền（舊第2郡）",
+        subtitle: "西貢河畔綠意街區・異國餐酒・香氛陶瓷與質感生活選物",
+        badgeColor: "bg-blue",
+        bgTint: "bg-[#FFFCF6]",
+        extraLink: { label: "Thảo Điền 區域指南", url: "https://thaodien.app/guide/complete-guide-thao-dien-saigon" },
+        svg: `
+          <svg class="w-full max-w-[260px] h-28 shrink-0" viewBox="0 0 280 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 西貢河波浪與小船 -->
+            <path d="M14 88C45 82 75 94 110 88C145 82 175 94 210 88C235 84 255 90 268 88" stroke="#A8D3E6" stroke-width="6" stroke-linecap="round"/>
+            <g class="svg-float">
+              <path d="M36 74H86L76 86H46L36 74Z" fill="#F6D27A" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M60 74V50L78 66H60Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.5" stroke-linejoin="round"/>
+            </g>
+            <!-- 綠意庭院別墅與熱帶植物 -->
+            <rect x="126" y="44" width="76" height="44" rx="6" fill="#FFFCF6" stroke="#3E3A39" stroke-width="3"/>
+            <polygon points="120,44 164,22 208,44" fill="#B9DAA5" stroke="#3E3A39" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="148" y="58" width="32" height="30" rx="16" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+            <!-- 椰子樹與闊葉植物 -->
+            <g class="svg-sway">
+              <path d="M234 86V46" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+              <path d="M234 46C216 44 212 30 226 28C232 27 234 38 234 46Z" fill="#B9DAA5" stroke="#3E3A39" stroke-width="2.5"/>
+              <path d="M234 46C252 44 256 30 242 28C236 27 234 38 234 46Z" fill="#A8D3E6" stroke="#3E3A39" stroke-width="2.5"/>
+            </g>
+            <path d="M12 96H268" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          </svg>`
+      },
+      bt: {
+        title: "Bình Thạnh（平盛郡順遊）",
+        subtitle: "連結第1郡與 Thảo Điền 之間的潮流旗艦店與韓系美妝體驗",
+        badgeColor: "bg-green",
+        bgTint: "bg-[#FFFCF6]",
+        extraLink: null,
+        svg: `
+          <svg class="w-full max-w-[260px] h-28 shrink-0" viewBox="0 0 280 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="52" cy="30" r="12" fill="#F2A497" stroke="#3E3A39" stroke-width="3" class="svg-float"/>
+            <!-- 高架捷運列車風景 -->
+            <path d="M20 62H260" stroke="#3E3A39" stroke-width="3"/>
+            <g class="svg-scoot">
+              <rect x="64" y="38" width="96" height="24" rx="10" fill="#A8D3E6" stroke="#3E3A39" stroke-width="3"/>
+              <rect x="78" y="44" width="18" height="10" rx="2" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2"/>
+              <rect x="104" y="44" width="18" height="10" rx="2" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2"/>
+              <rect x="130" y="44" width="18" height="10" rx="2" fill="#F6D27A" stroke="#3E3A39" stroke-width="2"/>
+            </g>
+            <!-- 街角潮流建築 -->
+            <rect x="188" y="30" width="56" height="66" rx="6" fill="#F6D27A" stroke="#3E3A39" stroke-width="3"/>
+            <rect x="200" y="44" width="32" height="22" rx="4" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2.5"/>
+            <path d="M12 96H268" stroke="#3E3A39" stroke-width="3" stroke-linecap="round"/>
+          </svg>`
+      }
+    };
+
+    // 完整 54 個地點清單 (含 55 個地圖連結與附屬官方連結)
+    const PLACES = [
+      // ==================== 第1郡中心 (29 個地點) ====================
+      {
+        id: "d1-1",
+        district: "d1",
+        name: "Phở Việt Nam",
+        categoryGroup: "food",
+        tag: "餐飲・越南河粉",
+        desc: "主打越南河粉等湯麵。",
+        color: "bg-coral",
+        icon: "noodle",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/5EASH6FB4AJ3hbUKA", primary: true }
+        ]
+      },
+      {
+        id: "d1-2",
+        district: "d1",
+        name: "錦麗河粉",
+        categoryGroup: "food",
+        tag: "餐飲・河粉",
+        desc: "店名依地圖中文標示，菜單細節可再點開地圖確認。",
+        color: "bg-coral",
+        icon: "noodle",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/oq5bsUR7k4EndUY17", primary: true }
+        ]
+      },
+      {
+        id: "d1-3",
+        district: "d1",
+        name: "Bếp Mẹ Ỉn",
+        categoryGroup: "food",
+        tag: "餐飲・越南料理",
+        desc: "適合找家常風格的越南餐點。",
+        color: "bg-yellow",
+        icon: "vietFood",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/TGU9zZpq8d94x2o27", primary: true }
+        ]
+      },
+      {
+        id: "d1-4",
+        district: "d1",
+        name: "Cộng Cà Phê",
+        categoryGroup: "cafe",
+        tag: "咖啡・越南咖啡館",
+        desc: "使用者特別註記椰子冰沙。",
+        color: "bg-green",
+        icon: "coffee",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/w6V2MT3JGvqf2yFT6", primary: true }
+        ]
+      },
+      {
+        id: "d1-5",
+        district: "d1",
+        name: "Little HaNoi Egg Coffee (Ky Con)",
+        categoryGroup: "cafe",
+        tag: "咖啡／早午餐",
+        desc: "招牌為蛋咖啡，也供應早餐餐點。",
+        color: "bg-yellow",
+        icon: "coffee",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/ym7FJHG1ocbFmEhT6", primary: true },
+          { label: "店家網站", url: "https://littlehanoieggcoffee.vn/", primary: false }
+        ]
+      },
+      {
+        id: "d1-6",
+        district: "d1",
+        name: "Tomatito Saigon – Tapas Bar",
+        categoryGroup: "food",
+        tag: "餐飲・西班牙 Tapas",
+        desc: "適合多人分享小份料理。",
+        color: "bg-coral",
+        icon: "wine",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/TgwruUNY8SYEFuY39", primary: true }
+        ]
+      },
+      {
+        id: "d1-7",
+        district: "d1",
+        name: "INE Teppanyaki & Sushi",
+        categoryGroup: "food",
+        tag: "餐飲・日式料理",
+        desc: "鐵板燒與壽司。",
+        color: "bg-blue",
+        icon: "sushi",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/SeNyybTU8zXY9NAQA", primary: true }
+        ]
+      },
+      {
+        id: "d1-8",
+        district: "d1",
+        name: "Hoàng’s Kitchen",
+        categoryGroup: "food",
+        tag: "餐飲・越南料理",
+        desc: "可作為越式餐點選擇。",
+        color: "bg-yellow",
+        icon: "vietFood",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/qgk2PVxHuxJ1V4m4A", primary: true }
+        ]
+      },
+      {
+        id: "d1-9",
+        district: "d1",
+        name: "The Workshop Coffee",
+        categoryGroup: "cafe",
+        tag: "咖啡・精品咖啡館",
+        desc: "適合安排咖啡休息。",
+        color: "bg-blue",
+        icon: "coffee",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/7ofETDGFfY57XXSp9", primary: true }
+        ]
+      },
+      {
+        id: "d1-10",
+        district: "d1",
+        name: "% Arabica, The Cafe Apartments",
+        categoryGroup: "cafe",
+        tag: "咖啡・精品咖啡",
+        desc: "位於知名的 Cafe Apartments 大樓內。",
+        color: "bg-blue",
+        icon: "coffee",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/Cj5QuTZRiSwBs3Bi9", primary: true }
+        ]
+      },
+      {
+        id: "d1-11",
+        district: "d1",
+        name: "B3 Steakhouse",
+        categoryGroup: "food",
+        tag: "餐飲・牛排館",
+        desc: "主打牛排與西式餐點。",
+        color: "bg-coral",
+        icon: "grill",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/4Ga8ppPfMoFK84ad6", primary: true }
+        ]
+      },
+      {
+        id: "d1-12",
+        district: "d1",
+        name: "FUME | Japanese Modern Cuisine",
+        categoryGroup: "food",
+        tag: "餐飲・現代日式料理",
+        desc: "適合安排較正式的一餐。",
+        color: "bg-blue",
+        icon: "sushi",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/TGpUorQ98L6SmzoQ6", primary: true }
+        ]
+      },
+      {
+        id: "d1-13",
+        district: "d1",
+        name: "遊雅亭 睦庵",
+        categoryGroup: "food",
+        tag: "餐飲",
+        desc: "僅依地圖名稱無法確認菜系，建議先查看菜單。",
+        color: "bg-yellow",
+        icon: "sushi",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/psbrgtq2H9GaghJV6", primary: true }
+        ]
+      },
+      {
+        id: "d1-14",
+        district: "d1",
+        name: "Sansung Korean BBQ",
+        categoryGroup: "food",
+        tag: "餐飲・韓式烤肉",
+        desc: "韓式烤肉餐廳。",
+        color: "bg-coral",
+        icon: "grill",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/gwfA8cBnMJL15tCG8", primary: true }
+        ]
+      },
+      {
+        id: "d1-15",
+        district: "d1",
+        name: "Another Bake Shop",
+        categoryGroup: "cafe",
+        tag: "烘焙・麵包甜點",
+        desc: "適合買烘焙點心或外帶。",
+        color: "bg-yellow",
+        icon: "bakery",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/fYycV1DtpaNWBF1q6", primary: true }
+        ]
+      },
+      {
+        id: "d1-16",
+        district: "d1",
+        name: "L’Espoir Studios",
+        categoryGroup: "shop",
+        tag: "購物・女裝服飾",
+        desc: "依使用者確認保留此店點；指向服飾店門市。",
+        color: "bg-coral",
+        icon: "fashion",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/zn9zfEH9CTT8Qy497", primary: true },
+          { label: "店家網站", url: "http://lespoir.com.vn/", primary: false }
+        ]
+      },
+      {
+        id: "d1-17",
+        district: "d1",
+        name: "PSYCHE SAIGON",
+        categoryGroup: "shop",
+        tag: "購物・服飾／客製印花",
+        desc: "可留意現場印製或設計商品。",
+        color: "bg-yellow",
+        icon: "fashion",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/iUDZ8Tf1d5j327qDA", primary: true },
+          { label: "品牌介紹", url: "https://docentpro.com/featured/vietnam-streetwear-finds-and-hidden-gems_f31e6118-0e6f-48e0-9199-d17a85dd07a8", primary: false }
+        ]
+      },
+      {
+        id: "d1-18",
+        district: "d1",
+        name: "waa. studios",
+        categoryGroup: "shop",
+        tag: "購物・配件／皮件",
+        desc: "越南配件品牌，主打日常配件與皮革商品。",
+        color: "bg-green",
+        icon: "bag",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/4ATsHC3dfwLQapLLA", primary: true },
+          { label: "品牌介紹", url: "https://waa-studios.com/pages/about", primary: false }
+        ]
+      },
+      {
+        id: "d1-19",
+        district: "d1",
+        name: "Gallery de Neyuh",
+        categoryGroup: "shop",
+        tag: "購物・皮件",
+        desc: "主打手工皮革包款。",
+        color: "bg-yellow",
+        icon: "bag",
+        links: [
+          { label: "地圖一", url: "https://maps.app.goo.gl/gnVX7AuawxMGBQvU9", primary: true },
+          { label: "地圖二", url: "https://maps.app.goo.gl/iKP9XSVn3w9yvNqZ8", primary: false },
+          { label: "店家網站", url: "https://neyuhleather.com/", primary: false }
+        ]
+      },
+      {
+        id: "d1-20",
+        district: "d1",
+        name: "so much closer Ben Thanh",
+        categoryGroup: "shop",
+        tag: "購物・禮品／文創小物",
+        desc: "可作為找特色紀念品的店點。",
+        color: "bg-green",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/iJxu944w6WASDYVt7", primary: true }
+        ]
+      },
+      {
+        id: "d1-21",
+        district: "d1",
+        name: "coi gift shop",
+        categoryGroup: "shop",
+        tag: "購物・禮品店",
+        desc: "適合挑選小禮物或紀念品。",
+        color: "bg-green",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/NFYio92gFD56kBqY9", primary: true }
+        ]
+      },
+      {
+        id: "d1-22",
+        district: "d1",
+        name: "CULCAT Lê Thị Riêng",
+        categoryGroup: "shop",
+        tag: "購物・越南在地禮品",
+        desc: "可找地方風格的伴手禮。",
+        color: "bg-yellow",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/q7d6QnRrWhGoejiX8", primary: true },
+          { label: "品牌頁面", url: "https://www.instagram.com/culcat.official", primary: false }
+        ]
+      },
+      {
+        id: "d1-23",
+        district: "d1",
+        name: "Grade B Vietnamese Ceramics and Gift Shop",
+        categoryGroup: "shop",
+        tag: "購物・越南陶瓷／禮品",
+        desc: "適合逛家飾與手作風格商品。",
+        color: "bg-blue",
+        icon: "ceramic",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/rqT6eqmCGnSudrQ37", primary: true }
+        ]
+      },
+      {
+        id: "d1-24",
+        district: "d1",
+        name: "amaï Dong Khoi",
+        categoryGroup: "shop",
+        tag: "購物・家居器皿",
+        desc: "以設計感餐具、陶瓷與家用品為主。",
+        color: "bg-blue",
+        icon: "ceramic",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/ERe9B23f1wU4RXzy8", primary: true }
+        ]
+      },
+      {
+        id: "d1-25",
+        district: "d1",
+        name: "Fwee Agit Việt Nam",
+        categoryGroup: "shop",
+        tag: "購物・美妝",
+        desc: "韓系彩妝與美容商品。",
+        color: "bg-coral",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/ebf2ZKtsgCwbPzVY9", primary: true }
+        ]
+      },
+      {
+        id: "d1-26",
+        district: "d1",
+        name: "LIBÉ Lý Tự Trọng",
+        categoryGroup: "shop",
+        tag: "購物・服飾",
+        desc: "越南服裝品牌門市。",
+        color: "bg-coral",
+        icon: "fashion",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/FUH8yqp9rNqRVFge7", primary: true }
+        ]
+      },
+      {
+        id: "d1-27",
+        district: "d1",
+        name: "Sả Spa & Onsen",
+        categoryGroup: "relax",
+        tag: "休閒・Spa／Onsen",
+        desc: "按摩與泡湯放鬆。",
+        color: "bg-green",
+        icon: "spa",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/CkX7CnyvrnengcyX7", primary: true }
+        ]
+      },
+      {
+        id: "d1-28",
+        district: "d1",
+        name: "AKIMI Aesthetic Clinic",
+        categoryGroup: "relax",
+        tag: "美容・醫美／護膚",
+        desc: "建議先確認現場服務項目。",
+        color: "bg-blue",
+        icon: "spa",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/YT6Cck8pCPTRBpCo6", primary: true }
+        ]
+      },
+      {
+        id: "d1-29",
+        district: "d1",
+        name: "Hung Long Money Exchange",
+        categoryGroup: "relax",
+        tag: "服務・換匯",
+        desc: "可列為市中心換匯點。",
+        color: "bg-yellow",
+        icon: "exchange",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/v8k5MeHoZ4yGVLLYA", primary: true }
+        ]
+      },
+
+      // ==================== Thảo Điền（舊第2郡）(23 個地點) ====================
+      {
+        id: "td-1",
+        district: "td",
+        name: "CHIIK Steak & Pasta Thảo Điền",
+        categoryGroup: "food",
+        tag: "餐飲・牛排／義大利麵",
+        desc: "西式主餐選擇。",
+        color: "bg-coral",
+        icon: "grill",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/ddq3qF8NGmVE2nd59", primary: true }
+        ]
+      },
+      {
+        id: "td-2",
+        district: "td",
+        name: "Mountain Pearl Roastery",
+        categoryGroup: "cafe",
+        tag: "咖啡・烘豆／咖啡館",
+        desc: "適合安排咖啡休息。",
+        color: "bg-blue",
+        icon: "coffee",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/qfsdygFHyuvXadGC8", primary: true }
+        ]
+      },
+      {
+        id: "td-3",
+        district: "td",
+        name: "Green Monkey Saigon",
+        categoryGroup: "cafe",
+        tag: "餐飲・健康餐／咖啡館",
+        desc: "提供偏健康取向的餐食與飲品。",
+        color: "bg-green",
+        icon: "vietFood",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/DWMSqYYN4pjwKV9eA", primary: true },
+          { label: "店家網站", url: "https://greenmonkeysg.com/", primary: false }
+        ]
+      },
+      {
+        id: "td-4",
+        district: "td",
+        name: "Little Bear Wine Bar",
+        categoryGroup: "cafe",
+        tag: "酒吧・葡萄酒",
+        desc: "適合晚間小酌。",
+        color: "bg-coral",
+        icon: "wine",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/rrBTKuv6yaErocXz8", primary: true }
+        ]
+      },
+      {
+        id: "td-5",
+        district: "td",
+        name: "I HATE MONDAY DINING",
+        categoryGroup: "food",
+        tag: "餐飲・餐廳",
+        desc: "可作為 Thảo Điền 的晚餐選項。",
+        color: "bg-yellow",
+        icon: "vietFood",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/oJdk3anWqtmyZFLv9", primary: true }
+        ]
+      },
+      {
+        id: "td-6",
+        district: "td",
+        name: "Stoker Woodfired Grill & Bar – Thao Dien",
+        categoryGroup: "food",
+        tag: "餐飲・柴燒烤肉／酒吧",
+        desc: "主打烤肉類西式料理。",
+        color: "bg-coral",
+        icon: "grill",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/69Pfjr9nH7KS1M2M8", primary: true }
+        ]
+      },
+      {
+        id: "td-7",
+        district: "td",
+        name: "MOGGUMUNG Korean BBQ Thảo Điền",
+        categoryGroup: "food",
+        tag: "餐飲・韓式烤肉",
+        desc: "使用者註記水芹菜烤肉。",
+        color: "bg-green",
+        icon: "grill",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/uwVLsaFGdK31mgcVA", primary: true },
+          { label: "店家介紹", url: "https://thaodien.app/venue/moggumung-korean-bbq-thao-ien", primary: false }
+        ]
+      },
+      {
+        id: "td-8",
+        district: "td",
+        name: "EonYang 韓式雞湯麵",
+        categoryGroup: "food",
+        tag: "餐飲・韓式料理",
+        desc: "雞湯與麵食。",
+        color: "bg-yellow",
+        icon: "noodle",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/1h1PESAb28XH64yA9", primary: true }
+        ]
+      },
+      {
+        id: "td-9",
+        district: "td",
+        name: "IWA Japanese Yakiniku",
+        categoryGroup: "food",
+        tag: "餐飲・日式燒肉",
+        desc: "日式燒肉專門店。",
+        color: "bg-coral",
+        icon: "grill",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/HWZWgk6R1e4caupk9", primary: true }
+        ]
+      },
+      {
+        id: "td-10",
+        district: "td",
+        name: "0123 Complex",
+        categoryGroup: "relax",
+        tag: "休閒・複合式商業空間",
+        desc: "可視為逛店或用餐的集合點。",
+        color: "bg-blue",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/tMTuWUBtTXBsvZJD8", primary: true }
+        ]
+      },
+      {
+        id: "td-11",
+        district: "td",
+        name: "NOTE – The Scent Lab",
+        categoryGroup: "shop",
+        tag: "購物・香氛",
+        desc: "香水與氣味相關商品。",
+        color: "bg-yellow",
+        icon: "ceramic",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/7Lxy8mSZAA1pkRDi9", primary: true }
+        ]
+      },
+      {
+        id: "td-12",
+        district: "td",
+        name: "Jamlos Flagship Store",
+        categoryGroup: "shop",
+        tag: "購物・帆布包",
+        desc: "越南包袋品牌門市。",
+        color: "bg-blue",
+        icon: "bag",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/7J6qfBhX24UfLMpC9", primary: true }
+        ]
+      },
+      {
+        id: "td-13",
+        district: "td",
+        name: "Vesta Lifestyle & Gifts",
+        categoryGroup: "shop",
+        tag: "購物・生活選物／禮品",
+        desc: "生活風格選物與禮品店。",
+        color: "bg-green",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/2YNXVJUtSmKit3DM9", primary: true }
+        ]
+      },
+      {
+        id: "td-14",
+        district: "td",
+        name: "KOKONIC – The Gift of Vietnam",
+        categoryGroup: "shop",
+        tag: "購物・越南伴手禮",
+        desc: "適合挑選在地風格禮品。",
+        color: "bg-yellow",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/4gnpyYUH3DDqc2FGA", primary: true }
+        ]
+      },
+      {
+        id: "td-15",
+        district: "td",
+        name: "Nomad Leather",
+        categoryGroup: "shop",
+        tag: "購物・皮件",
+        desc: "皮革包款與配件。",
+        color: "bg-coral",
+        icon: "bag",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/RXQqZHsvrrRqzxrf9", primary: true }
+        ]
+      },
+      {
+        id: "td-16",
+        district: "td",
+        name: "BARTELS Thao Dien",
+        categoryGroup: "cafe",
+        tag: "餐飲・酸種三明治／咖啡／果汁",
+        desc: "供應酸種麵包三明治、咖啡與鮮榨果汁。",
+        color: "bg-yellow",
+        icon: "bakery",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/eMdbHgqYwLotxJSo8", primary: true }
+        ]
+      },
+      {
+        id: "td-17",
+        district: "td",
+        name: "In The Mood Saigon",
+        categoryGroup: "shop",
+        tag: "購物・生活選物",
+        desc: "可逛家居與生活風格商品。",
+        color: "bg-green",
+        icon: "ceramic",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/kZUMjwmtdmqjU8fH9", primary: true }
+        ]
+      },
+      {
+        id: "td-18",
+        district: "td",
+        name: "TuHu Ceramics",
+        categoryGroup: "shop",
+        tag: "購物・陶瓷",
+        desc: "陶器與家居器皿。",
+        color: "bg-blue",
+        icon: "ceramic",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/SnAPMCGWRvZtbByo7", primary: true }
+        ]
+      },
+      {
+        id: "td-19",
+        district: "td",
+        name: "Omakase Tiger – Thảo Điền",
+        categoryGroup: "food",
+        tag: "餐飲・日式 Omakase",
+        desc: "適合安排主廚套餐體驗。",
+        color: "bg-blue",
+        icon: "sushi",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/CyQEU9aDXjVfyHzz6", primary: true }
+        ]
+      },
+      {
+        id: "td-20",
+        district: "td",
+        name: "Carpe Diem 28",
+        categoryGroup: "shop",
+        tag: "購物・手工蠟燭／禮品",
+        desc: "手工香氛蠟燭與禮品選物。",
+        color: "bg-coral",
+        icon: "gift",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/Kz4ibkugzegHsqjf9", primary: true }
+        ]
+      },
+      {
+        id: "td-21",
+        district: "td",
+        name: "UNIQLO Vincom Thao Dien",
+        categoryGroup: "shop",
+        tag: "購物・服飾",
+        desc: "大型連鎖服裝店。",
+        color: "bg-coral",
+        icon: "fashion",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/wESRBG1rofKboUq57", primary: true }
+        ]
+      },
+      {
+        id: "td-22",
+        district: "td",
+        name: "M&S Wellness Spa",
+        categoryGroup: "relax",
+        tag: "休閒・Spa／按摩",
+        desc: "身心舒壓與按摩護理。",
+        color: "bg-green",
+        icon: "spa",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/1fjUz19p66jY9UKm8", primary: true }
+        ]
+      },
+      {
+        id: "td-23",
+        district: "td",
+        name: "Mandarin Spa & Massage",
+        categoryGroup: "relax",
+        tag: "休閒・Spa／按摩",
+        desc: "舒適按摩與芳療放鬆空間。",
+        color: "bg-green",
+        icon: "spa",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/u2YJjPCZBzAqAxWL9", primary: true }
+        ]
+      },
+
+      // ==================== Bình Thạnh (2 個地點) ====================
+      {
+        id: "bt-1",
+        district: "bt",
+        name: "What it isNt Bình Thạnh House Flagship Store",
+        categoryGroup: "shop",
+        tag: "購物・服飾／生活風格品牌門市",
+        desc: "街頭潮流服飾與生活風格品牌旗艦店。",
+        color: "bg-yellow",
+        icon: "fashion",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/ZeS2N6NWBriKgdDC6", primary: true }
+        ]
+      },
+      {
+        id: "bt-2",
+        district: "bt",
+        name: "Beauty a.ll 뷰티올",
+        categoryGroup: "relax",
+        tag: "美容・美妝／美容服務",
+        desc: "建議先查看地圖頁確認服務內容。",
+        color: "bg-coral",
+        icon: "spa",
+        links: [
+          { label: "Google Maps", url: "https://maps.app.goo.gl/ocrAXqVsVySGoZcs6", primary: true }
+        ]
+      }
+    ];
+
+    // 狀態管理
+    let currentDistrict = "d1";
+    let currentCat = "all";
+    let searchQuery = "";
+
+    // DOM 元素
+    const bannerInner = document.getElementById("banner-inner");
+    const placesGrid = document.getElementById("places-grid");
+    const emptyState = document.getElementById("empty-state");
+    const totalCounterBadge = document.getElementById("total-counter-badge");
+    const searchInput = document.getElementById("search-input");
+    const clearSearchBtn = document.getElementById("clear-search-btn");
+    const resetFilterBtn = document.getElementById("reset-filter-btn");
+    const backToTopBtn = document.getElementById("back-to-top-btn");
+    const districtTabs = document.querySelectorAll(".district-tab");
+    const catPills = document.querySelectorAll(".cat-pill");
+
+    // 渲染橫幅
+    function renderBanner() {
+      const info = DISTRICT_BANNERS[currentDistrict];
+      const extraBtnHtml = info.extraLink
+        ? `<a href="${info.extraLink.url}" target="_blank" rel="noopener noreferrer" class="ehon-btn bg-yellow px-3.5 py-1.5 text-xs mt-2.5">
+             📖 ${info.extraLink.label} ↗
+           </a>`
+        : "";
+
+      bannerInner.innerHTML = `
+        <div class="flex-1 text-left">
+          <div class="inline-block ehon-badge ${info.badgeColor} mb-2">
+            📍 區域散步指南
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold leading-snug mb-1">${info.title}</h2>
+          <p class="text-xs sm:text-sm opacity-85 leading-relaxed">${info.subtitle}</p>
+          ${extraBtnHtml}
+        </div>
+        <div class="flex items-center justify-center">
+          ${info.svg}
+        </div>
+      `;
+    }
+
+    // 觸發彈跳動畫
+    function triggerBounce(el, className) {
+      el.classList.remove(className);
+      void el.offsetWidth;
+      el.classList.add(className);
+    }
+
+    // 渲染地點卡片
+    function renderPlaces(withBounce = false) {
+      const q = searchQuery.trim().toLowerCase();
+
+      const filtered = PLACES.filter((item) => {
+        const matchDistrict = item.district === currentDistrict;
+        const matchCat = currentCat === "all" || item.categoryGroup === currentCat;
+        const matchQuery = !q ||
+          item.name.toLowerCase().includes(q) ||
+          item.tag.toLowerCase().includes(q) ||
+          item.desc.toLowerCase().includes(q);
+        return matchDistrict && matchCat && matchQuery;
+      });
+
+      const districtLabelMap = {
+        d1: "第1郡",
+        td: "Thảo Điền",
+        bt: "Bình Thạnh"
+      };
+      totalCounterBadge.textContent = `${districtLabelMap[currentDistrict]}｜顯示 ${filtered.length} 處`;
+
+      if (filtered.length === 0) {
+        placesGrid.classList.add("hidden");
+        emptyState.classList.remove("hidden");
+        return;
+      }
+
+      emptyState.classList.add("hidden");
+      placesGrid.classList.remove("hidden");
+
+      placesGrid.innerHTML = filtered.map((place) => {
+        const svgMarkup = SVG_ICONS[place.icon] || SVG_ICONS.gift;
+        const buttonsHtml = place.links.map((lnk) => {
+          const btnBg = lnk.primary ? "bg-yellow" : "bg-washi";
+          const iconPin = lnk.primary
+            ? `<svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none">
+                 <path d="M12 21C16 16.5 19 13 19 9C19 5.13 15.87 2 12 2C8.13 2 5 5.13 5 9C5 13 8 16.5 12 21Z" fill="#F2A497" stroke="#3E3A39" stroke-width="2.2"/>
+                 <circle cx="12" cy="9" r="2.5" fill="#FFFCF6" stroke="#3E3A39" stroke-width="2"/>
+               </svg>`
+            : `<svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none">
+                 <path d="M10 6H6V18H18V14M14 4H20M20 4V10M20 4L10 14" stroke="#3E3A39" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+               </svg>`;
+          return `
+            <a
+              href="${lnk.url}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="ehon-btn ${btnBg} px-3.5 py-2 text-xs sm:text-sm"
+            >
+              ${iconPin}
+              <span>${lnk.label}</span>
+            </a>
+          `;
+        }).join("");
+
+        return `
+          <article class="ehon-card p-4 flex flex-col justify-between gap-3">
+            <div class="flex items-start gap-3.5">
+              <!-- 手繪 SVG 插圖框 -->
+              <div class="w-16 h-16 rounded-2xl border-[3px] border-[#3E3A39] ${place.color} flex items-center justify-center shrink-0">
+                ${svgMarkup}
+              </div>
+              <div class="flex-1 min-w-0">
+                <span class="ehon-badge ${place.color} mb-1.5">
+                  ${place.tag}
+                </span>
+                <h3 class="text-base sm:text-lg font-bold leading-snug break-words">
+                  ${place.name}
+                </h3>
+                <p class="text-xs sm:text-sm opacity-85 mt-1 leading-relaxed">
+                  ${place.desc}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 pt-2 border-t-2 border-dashed border-[#3E3A39]/30">
+              ${buttonsHtml}
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      if (withBounce) {
+        triggerBounce(placesGrid, "bounce-enter");
+        triggerBounce( document.getElementById("district-banner"), "bounce-enter");
+      }
+    }
+
+    // 切換區域頁籤事件
+    districtTabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const targetDistrict = tab.dataset.district;
+        if (!targetDistrict) return;
+        currentDistrict = targetDistrict;
+
+        districtTabs.forEach((t) => {
+          const isSelected = t.dataset.district === currentDistrict;
+          t.setAttribute("aria-selected", isSelected ? "true" : "false");
+          t.classList.remove("bg-coral", "bg-blue", "bg-green", "bg-washi");
+          if (isSelected) {
+            const activeBg = currentDistrict === "d1" ? "bg-coral" : (currentDistrict === "td" ? "bg-blue" : "bg-green");
+            t.classList.add(activeBg);
+            triggerBounce(t, "tab-active-pop");
+          } else {
+            t.classList.add("bg-washi");
+          }
+        });
+
+        renderBanner();
+        renderPlaces(true);
+      });
+    });
+
+    // 切換分類膠囊事件
+    catPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        currentCat = pill.dataset.cat || "all";
+        catPills.forEach((p) => {
+          const isSelected = p.dataset.cat === currentCat;
+          p.classList.remove("bg-yellow", "bg-washi");
+          p.classList.add(isSelected ? "bg-yellow" : "bg-washi");
+        });
+        renderPlaces(true);
+      });
+    });
+
+    // 搜尋框事件
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value;
+      clearSearchBtn.classList.toggle("hidden", !searchQuery.trim());
+      renderPlaces(false);
+    });
+
+    clearSearchBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchQuery = "";
+      clearSearchBtn.classList.add("hidden");
+      renderPlaces(true);
+    });
+
+    resetFilterBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      searchQuery = "";
+      currentCat = "all";
+      clearSearchBtn.classList.add("hidden");
+      catPills.forEach((p) => {
+        p.classList.remove("bg-yellow", "bg-washi");
+        p.classList.add(p.dataset.cat === "all" ? "bg-yellow" : "bg-washi");
+      });
+      renderPlaces(true);
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // 初始化渲染
+    renderBanner();
+    renderPlaces(false);
+  </script>
+</body>
+</html>
